@@ -15,41 +15,23 @@ function test() {
 
 }
 
-function testContenu1() {
-    test();
-    const info = document.getElementById('recup');
-    setTimeout(() => {
-    if (info.innerHTML === 'Je dors 19'){
-        console.log('Test 1 réussi ');
-    } else {
-        console.log('Test 1 échoué');
+
+function unitaire() {
+fetch('http://172.29.18.123/data.json', 
+{ method: 'GET' })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-}, 1000);
-}
-function testAvantFonction() {
-    const info = document.getElementById('recup');
-    info.innerHTML = "";
-    if (info.innerHTML === "") {
-        console.log("Test 2 réussi ");
-    } else {
-        console.log("Test 2 échoué");
-    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log('Data fetched:', data);
+  })
+  .catch((error) => {
+    console.error('Fetch error:', error);
+  });
 }
 
-
-function testContenu2() {
-    test();
-    const info = document.getElementById('recup');
-    setTimeout(() => {
-    if (info.innerHTML === "Martin Sophie 25") {
-        console.log("Test 3 réussi ");
-    } else {
-        console.log("Test 3 échoué");
-    }
-}, 1000);
-}
-
-
-testAvantFonction();
-testContenu1();
-testContenu2();  
+unitaire();
+test();
